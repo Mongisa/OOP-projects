@@ -17,7 +17,7 @@ public class Invoice {
     }
 
     public void insertProduct(Product product) {
-        if(this.count == this.products.length-1) {
+        if(this.count == this.products.length) {
             System.out.println("Invoice is full!");
             return;
         }
