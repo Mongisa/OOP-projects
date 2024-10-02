@@ -11,7 +11,8 @@ public class Person {
         this.cf = cf;
     }
 
-    public String getName() {
+    //With final -> cannot be overwritten
+    final public String getName() {
         return this.name;
     }
 
@@ -27,5 +28,11 @@ public class Person {
         System.out.println("Name: " + this.name);
         System.out.println("Surname: " + this.surname);
         System.out.println("CF: " + this.cf);
+    }
+
+    //toString() redefinition
+    @Override
+    public String toString() {
+        return "Persona - " + this.name + " " + this.surname + " " + this.cf;
     }
 }
