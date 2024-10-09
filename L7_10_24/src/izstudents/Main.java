@@ -9,7 +9,7 @@ import spaces.Accessible;
 public class Main {
     public static void main(String[] args) {
         Person p = new Person("Mario","Rossi","MRS0001");
-        Student s = new Student("Stefano","Grigi","SRG0002","06127001",29.5f);
+        Student s = new Student("Stefano","Grigi","SRG0002","06127001",-29.5f);
 
         Classroom c = new Classroom("M",4);
 

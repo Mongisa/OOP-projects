@@ -6,7 +6,7 @@ public class Student extends PersonUnisa{
     public Student(String name, String surname, String cf, String id, float examAverage) {
         super(name, surname, cf, id);
 
-        if(examAverage < 18) throw new RuntimeException("examAverage can't be < 18");
+        if(examAverage < 18) throw new AverageNotPermittedException("examAverage can't be < 18");
 
         this.examsAverage = examAverage;
     }
