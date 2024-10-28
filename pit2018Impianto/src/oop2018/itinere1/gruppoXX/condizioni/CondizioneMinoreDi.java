@@ -13,7 +13,7 @@ public class CondizioneMinoreDi implements Condizione {
 
     @Override
     public boolean verifica() {
-        return this.sensore.getValore() > this.valoreDiConfronto;
+        return this.sensore.getValore() < this.valoreDiConfronto;
     }
 
     @Override
