@@ -4,9 +4,9 @@ import java.util.*;
 import java.time.LocalDate;
 
 public class Magazzino {
-    private String id;
+    private final String id;
     private String nome;
-    private Set<Scorta> inventario;
+    private final Set<Scorta> inventario;
 
     public Magazzino(String id, String nome) {
         this.id = id;
@@ -23,7 +23,7 @@ public class Magazzino {
         return this.nome;
     }
 
-    public void setNome() {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 

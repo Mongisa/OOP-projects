@@ -3,7 +3,7 @@ package magazzino;
 import java.time.LocalDate;
 
 public class Scorta {
-    private Prodotto prodotto;
+    private final Prodotto prodotto;
     private int quantitaDisponibile;
     private LocalDate dataUltimoAggiornamento;
 
