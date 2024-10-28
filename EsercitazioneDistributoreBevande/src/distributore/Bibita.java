@@ -59,7 +59,7 @@ public abstract class Bibita implements Comparable<Bibita> {
 
         sb.append("codice=" + this.codice + "\n");
         sb.append("nome=" + this.nome + "\n");
-        sb.append("prezzo=" + this.prezzo + "\n");
+        sb.append("prezzo=" + this.prezzo + " €\n");
         sb.append("numero=" + this.numero + "\n");
 
         return sb.toString();

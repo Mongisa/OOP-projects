@@ -6,8 +6,8 @@ import distributore.bibite.CocaCola;
 import distributore.eccezioni.*;
 
 public class Distributore {
-    private List<Bibita> bibite;
-    private Set<Tessera> tessere;
+    private final List<Bibita> bibite;
+    private final Set<Tessera> tessere;
 
     public Distributore() {
         this.bibite = new ArrayList<>();
@@ -18,7 +18,7 @@ public class Distributore {
         Tessera t = new Tessera(codice, 0);
 
         if(!this.tessere.add(t)) {
-            throw new CodiceTesseraPresenteException("Codice Tessera già presente");
+            throw new CodiceTesseraPresenteException("Codice Tessera " + codice + " già presente");
         }
     }
 
@@ -26,7 +26,7 @@ public class Distributore {
         Tessera t = new Tessera(codice, 0);
 
         if(!this.tessere.contains(t)) {
-            throw new TesseraNonValidaException("Tessera Non Valida");
+            throw new TesseraNonValidaException("Tessera " + codice + " Non Valida");
         }
 
         for(Tessera ti: this.tessere) {
@@ -39,8 +39,8 @@ public class Distributore {
     }
 
     public void registraBibita(Bibita b) throws CodiceBibitaPresenteException {
-        if(!this.bibite.contains(b)) {
-            throw new CodiceBibitaPresenteException("Codice bibita già presente");
+        if(this.bibite.contains(b)) {
+            throw new CodiceBibitaPresenteException("Bibita con codice "+ b.getCodice() + " già presente");
         }
 
         this.bibite.add(b);
@@ -51,10 +51,12 @@ public class Distributore {
         int index = this.bibite.indexOf(b);
 
         if(index < 0) {
-            throw new BibitaNonPresenteException("Bibita non presente");
+            throw new BibitaNonPresenteException("Bibita " + codice + " non presente");
         }
 
-        this.bibite.get(index).setNumero(numero);
+        b= this.bibite.get(index);
+
+        b.setNumero(b.getNumero() + numero);
     }
 
     public void eroga(String codiceBevanda, int codiceTessera) throws TesseraNonValidaException, BibitaNonPresenteException, BibitaEsauritaException, CreditoInsufficienteException {
@@ -63,7 +65,7 @@ public class Distributore {
         int index = this.bibite.indexOf(b);
 
         if(!this.tessere.contains(t)) {
-            throw new TesseraNonValidaException("Tessera non valida");
+            throw new TesseraNonValidaException("Tessera " + codiceTessera + " non valida");
         }
 
         for(Tessera ti: this.tessere) {
@@ -72,29 +74,30 @@ public class Distributore {
         }
 
         if(index < 0) {
-            throw new BibitaNonPresenteException("Bibita non presente");
+            throw new BibitaNonPresenteException("Bibita " + codiceBevanda + " non presente");
         }
 
         b = this.bibite.get(index);
 
         if(b.getNumero() <= 0) {
-            throw new BibitaEsauritaException("Bibita esaurita");
+            throw new BibitaEsauritaException("Bibita" + b.getNome() + " esaurita");
         }
 
         if(t.getSaldo() < b.getPrezzo()) {
-            throw new CreditoInsufficienteException("Credito insufficiente");
+            throw new CreditoInsufficienteException("Credito insufficiente (" + t.getSaldo() + ")");
         }
 
         b.setNumero(b.getNumero() - 1);
+        t.setSaldo(t.getSaldo() - b.getPrezzo());
 
-        System.out.println("Hai acquistato " + b.getClass() + " " + b.getPrezzo() + "€");
+        System.out.println("Hai acquistato " + b.getNome() + " " + b.getPrezzo() + "€");
     }
 
     public double visualizzaSaldoTessera(int codice) throws TesseraNonValidaException {
         Tessera t = new Tessera(codice, 0);
 
         if(!this.tessere.contains(t)) {
-            throw new TesseraNonValidaException("Tessera non valida");
+            throw new TesseraNonValidaException("Tessera " + codice + " non valida");
         }
 
         for(Tessera ti: this.tessere) {
@@ -110,14 +113,32 @@ public class Distributore {
         int index = this.bibite.indexOf(b);
 
         if(index < 0) {
-            throw new BibitaNonPresenteException("Bibita non presente");
+            throw new BibitaNonPresenteException("Bibita " + codice + " non presente");
         }
 
         for(Bibita bi: this.bibite) {
-            if(bi.getCodice() == codice)
+            if(bi.getCodice().equals(codice))
                 b = bi;
         }
 
         return b.getNumero();
+    }
+
+    //Non richiesto, implementato per debugging
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer("---Info Distributore---\n");
+        sb.append("---Lista tessere---\n");
+        for(Tessera t: this.tessere) {
+            sb.append(t.toString()).append("\n");
+        }
+
+        sb.append("\n");
+        sb.append("---Lista bibite---\n");
+        for(Bibita b: this.bibite) {
+            sb.append(b.toString()).append("\n");
+        }
+
+        return sb.toString();
     }
 }

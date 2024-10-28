@@ -36,4 +36,10 @@ public class Tessera implements Comparable<Tessera> {
     public int compareTo(Tessera t) {
         return this.codice - t.codice;
     }
+
+    //Non richiesto, implementato per debugging
+    @Override
+    public String toString() {
+        return "codiceTessera=" + codice + "\nSaldo=" + saldo + " €\n";
+    }
 }
