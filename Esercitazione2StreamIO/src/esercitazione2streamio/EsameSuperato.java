@@ -1,17 +1,18 @@
 package esercitazione2streamio;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class EsameSuperato implements Comparable<EsameSuperato> {
+public class EsameSuperato implements Comparable<EsameSuperato>, Serializable {
     private final String matricolaStudente;
     private final LocalDate annoMeseGiorno;
     private final String nomeInsegnamento;
-    private final double voto;
+    private final int voto;
     private final int id;
     private static int index = 0;
 
-    public EsameSuperato(String matricolaStudente, LocalDate annoMeseGiorno, String nomeInsegnamento, double voto) {
+    public EsameSuperato(String matricolaStudente, LocalDate annoMeseGiorno, String nomeInsegnamento, int voto) {
         this.matricolaStudente = matricolaStudente;
         this.annoMeseGiorno = annoMeseGiorno;
         this.nomeInsegnamento = nomeInsegnamento;
