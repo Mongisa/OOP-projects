@@ -5,9 +5,11 @@ import javafx.collections.ObservableList;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class LibrettoEsami implements Serializable {
     private final ObservableList<EsameSuperato> esamiSuperati;
@@ -15,6 +17,10 @@ public class LibrettoEsami implements Serializable {
 
     public LibrettoEsami() {
         this.esamiSuperati = FXCollections.observableArrayList();
+    }
+
+    public LibrettoEsami(List<EsameSuperato> esamiSuperati) {
+        this.esamiSuperati = FXCollections.observableArrayList(esamiSuperati);
     }
 
     public void addEsameSuperato(EsameSuperato esameSuperato) {
@@ -57,6 +63,29 @@ public class LibrettoEsami implements Serializable {
             ex.printStackTrace();
             return null;
         }
+    }
+
+    public void saveObj(String filename) {
+        try(ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(filename)))) {
+            oos.writeObject(new ArrayList<>(esamiSuperati));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static LibrettoEsami readObj(String filename) {
+        try(ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filename)))) {
+            List<EsameSuperato> le =(List<EsameSuperato>) ois.readObject();
+            return new LibrettoEsami(le);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<EsameSuperato> getLibrettoOrdinato() {
+        this.esamiSuperati.sort(new EsameSuperatoComparator());
+        return this.esamiSuperati;
     }
 
     @Override
