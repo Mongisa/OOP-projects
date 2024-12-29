@@ -16,6 +16,7 @@ import java.util.Scanner;
 public class CovReportService extends Service<ObservableList<CovReportEntry>> {
     private final String partialUrl = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-province/dpc-covid19-ita-province-";
     private String url;
+    private String denominazioneRegione;
 
     public void setDateInUrl(LocalDate date) {
         this.url = partialUrl + date.toString().replace("-","") + ".csv";
@@ -23,6 +24,14 @@ public class CovReportService extends Service<ObservableList<CovReportEntry>> {
 
     public String getUrl() {
         return this.url;
+    }
+
+    public void setDenominazioneRegione(String denominazioneRegione) {
+        this.denominazioneRegione = denominazioneRegione;
+    }
+
+    public String getDenominazioneRegione() {
+        return this.denominazioneRegione;
     }
 
     @Override
@@ -74,11 +83,19 @@ public class CovReportService extends Service<ObservableList<CovReportEntry>> {
                         String note = sb.toString();
 
                         CovReportEntry cre = new CovReportEntry(dateTime, stato,codiceRegione,denominazioneRegione,codiceProvincia,denominazioneProvincia,siglaProvincia,latitudine,longitudine,totaleCasi,note);
-                        l.add(cre);
-                    }
 
+                        if(getDenominazioneRegione() != null && !getDenominazioneRegione().isEmpty()) {
+                            if(denominazioneRegione.contains(getDenominazioneRegione())) {
+                                l.add(cre);
+                            }
+                        } else {
+                            l.add(cre);
+                        }
+                    }
+                    updateProgress(1, 1);
                     return l;
                 } catch(IOException e) {
+                    updateProgress(1, 1);
                     return null;
                 }
             };

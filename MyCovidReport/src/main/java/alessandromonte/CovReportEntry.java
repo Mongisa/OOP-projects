@@ -6,26 +6,26 @@ public class CovReportEntry implements Comparable<CovReportEntry> {
     private LocalDateTime date;
     private String stato;
     private String codice_regione;
-    private String denominazione_regione;
+    private String denominazioneRegione;
     private String codice_provincia;
-    private String denominazione_provincia;
+    private String denominazioneProvincia;
     private String sigla_provincia;
     private double latitudine;
     private double longitudine;
-    private int totale_casi;
+    private int totaleCasi;
     private String note;
 
     public CovReportEntry(LocalDateTime date, String stato, String codice_regione, String denominazione_regione, String codice_provincia, String denominazione_provincia, String sigla_provincia, double latitudine, double longitudine, int totale_casi, String note) {
         this.date = date;
         this.stato = stato;
         this.codice_regione = codice_regione;
-        this.denominazione_regione = denominazione_regione;
+        this.denominazioneRegione = denominazione_regione;
         this.codice_provincia = codice_provincia;
-        this.denominazione_provincia = denominazione_provincia;
+        this.denominazioneProvincia = denominazione_provincia;
         this.sigla_provincia = sigla_provincia;
         this.latitudine = latitudine;
         this.longitudine = longitudine;
-        this.totale_casi = totale_casi;
+        this.totaleCasi = totale_casi;
         this.note = note;
     }
 
@@ -53,12 +53,12 @@ public class CovReportEntry implements Comparable<CovReportEntry> {
         this.codice_regione = codice_regione;
     }
 
-    public String getDenominazione_regione() {
-        return denominazione_regione;
+    public String getDenominazioneRegione() {
+        return denominazioneRegione;
     }
 
-    public void setDenominazione_regione(String denominazione_regione) {
-        this.denominazione_regione = denominazione_regione;
+    public void setDenominazioneRegione(String denominazione_regione) {
+        this.denominazioneRegione = denominazione_regione;
     }
 
     public String getCodice_provincia() {
@@ -69,12 +69,12 @@ public class CovReportEntry implements Comparable<CovReportEntry> {
         this.codice_provincia = codice_provincia;
     }
 
-    public String getDenominazione_provincia() {
-        return denominazione_provincia;
+    public String getDenominazioneProvincia() {
+        return denominazioneProvincia;
     }
 
     public void setDenominazione_provincia(String denominazione_provincia) {
-        this.denominazione_provincia = denominazione_provincia;
+        this.denominazioneProvincia = denominazione_provincia;
     }
 
     public String getSigla_provincia() {
@@ -101,12 +101,12 @@ public class CovReportEntry implements Comparable<CovReportEntry> {
         this.longitudine = longitudine;
     }
 
-    public int getTotale_casi() {
-        return totale_casi;
+    public int getTotaleCasi() {
+        return totaleCasi;
     }
 
-    public void setTotale_casi(int totale_casi) {
-        this.totale_casi = totale_casi;
+    public void setTotaleCasi(int totale_casi) {
+        this.totaleCasi = totale_casi;
     }
 
     public String getNote() {
@@ -136,5 +136,25 @@ public class CovReportEntry implements Comparable<CovReportEntry> {
         }
 
         return r;
+    }
+
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+
+        sb.append("CovReportEntry{");
+        sb.append("date=").append(date);
+        sb.append(", stato=").append(stato);
+        sb.append(", codice_regione=").append(codice_regione);
+        sb.append(", denominazioneRegione=").append(denominazioneRegione);
+        sb.append(", codice_provincia=").append(codice_provincia);
+        sb.append(", denominazioneProvincia=").append(denominazioneProvincia);
+        sb.append(", sigla_provincia=").append(sigla_provincia);
+        sb.append(", latitudine=").append(latitudine);
+        sb.append(", longitudine=").append(longitudine);
+        sb.append(", totaleCasi=").append(totaleCasi);
+        sb.append(", note=").append(note);
+
+        return sb.append("}").toString();
     }
 }
