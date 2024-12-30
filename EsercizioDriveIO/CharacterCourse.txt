@@ -1,0 +1,6 @@
+NOME,MATRICOLA,ESAMISOSTENUTI,VOTOMEDIO
+Mario Rossi,0434,2,21.5
+Mario Rossi,0123,5,27.4
+Mario Rossi,1982,9,26.6
+Mario Rossi,2584,15,29.2
+Mario Rossi,4643,13,19.9
