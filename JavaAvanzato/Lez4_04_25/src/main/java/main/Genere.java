@@ -1,0 +1,5 @@
+package main;
+
+public enum Genere {
+    COMMEDIA, THRILLER, FANSTASCIENZA, ANIMAZIONE, AZIONE, DRAMMATICO
+}
